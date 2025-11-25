@@ -6,34 +6,6 @@
 
 ---
 
-## 📚 Phase 1: 기초 개념 이해
-
-### 1.1 논문 및 배경 이론 학습
-- [ ] HPT 논문 정독 ([arXiv:2509.04419](https://arxiv.org/abs/2509.04419))
-  - [ ] Introduction 및 Motivation 이해
-  - [ ] Unified Policy Gradient Estimator 수식 이해
-  - [ ] Switch vs Soft 전략 차이점 파악
-- [ ] 관련 개념 복습
-  - [ ] PPO (Proximal Policy Optimization) 알고리즘
-  - [ ] GRPO (Group Relative Policy Optimization)
-  - [ ] Advantage Estimation (GAE, REINFORCE)
-  - [ ] On-policy vs Off-policy 강화학습
-- [ ] 참고 자료
-  - [ ] 원본 HPT GitHub 저장소 확인: [TsinghuaC3I/Unify-Post-Training](https://github.com/TsinghuaC3I/Unify-Post-Training)
-
-### 1.2 프로젝트 구조 파악
-- [ ] README.md 읽기 (프로젝트 개요)
-- [ ] Agent.md 정독 (상세 기술 문서)
-  - [ ] Section 1-10: 전체 아키텍처
-  - [ ] Section 11-15: 설정 및 실행
-  - [ ] Section 16-24: 수정 가이드 및 참조
-- [ ] 디렉토리 구조 탐색
-  - [ ] `exp_scripts/`: 실행 스크립트
-  - [ ] `hpt/verl/verl/mix_src/`: 핵심 구현
-  - [ ] 누락 파일 목록 확인 (VRAG agent, dataset 등)
-
----
-
 ## 🔍 Phase 2: 코드 세부 분석
 
 ### 2.1 메인 트레이너 분석 (`mix_trainer.py`)
@@ -411,7 +383,6 @@ L_total = L_RL(on-policy) + λ_SFT × L_SFT(off-policy)
 - [x] 코드베이스 초기 탐색
 
 ### 현재 진행 중
-- [ ] Phase 1: 기초 개념 이해
 - [ ] Phase 2: 코드 세부 분석
 
 ### 다음 단계
