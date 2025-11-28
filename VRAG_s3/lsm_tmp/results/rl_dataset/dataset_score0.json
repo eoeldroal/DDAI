@@ -1,0 +1,170 @@
+{
+  "examples": [
+    {
+      "uid": "train_2",
+      "query": "Which is used more for payment in India in 2013, Credit Cards or Debit Cards?",
+      "reference_answer": "Credit Cards",
+      "meta_info": {
+        "file_name": "2.pdf",
+        "reference_page": [
+          7
+        ]
+      }
+    },
+    {
+      "uid": "train_4",
+      "query": "How many online shopping orders are made per month in CY2013 in India?",
+      "reference_answer": "5M",
+      "meta_info": {
+        "file_name": "4.pdf",
+        "reference_page": [
+          11
+        ]
+      }
+    },
+    {
+      "uid": "train_5",
+      "query": "What is the MAIN DISADVANTAGE of INERT GAS?",
+      "reference_answer": "POSES A GRAVE HEALTH HAZARD",
+      "meta_info": {
+        "file_name": "5.pdf",
+        "reference_page": [
+          4
+        ]
+      }
+    },
+    {
+      "uid": "train_7",
+      "query": "What can Provision of an IGS do?",
+      "reference_answer": "give absolute control",
+      "meta_info": {
+        "file_name": "7.pdf",
+        "reference_page": [
+          2
+        ]
+      }
+    },
+    {
+      "uid": "train_8",
+      "query": "What does an OXYGEN ANALYSER do?",
+      "reference_answer": "Measures OXYGEN by % volume",
+      "meta_info": {
+        "file_name": "8.pdf",
+        "reference_page": [
+          5
+        ]
+      }
+    },
+    {
+      "uid": "train_9",
+      "query": "What are the Lower and Upper Limits in Air % by Volume for Propane?",
+      "reference_answer": "2.2, 9.5",
+      "meta_info": {
+        "file_name": "9.pdf",
+        "reference_page": [
+          8
+        ]
+      }
+    },
+    {
+      "uid": "train_13",
+      "query": "How many minutes does Hive take to process 1hr of Site Activity Data?",
+      "reference_answer": "18",
+      "meta_info": {
+        "file_name": "13.pdf",
+        "reference_page": [
+          13
+        ]
+      }
+    },
+    {
+      "uid": "train_14",
+      "query": "What is the Kodak Brownie Snap-Shot Camera?",
+      "reference_answer": "first easy to use point and shoot",
+      "meta_info": {
+        "file_name": "14.pdf",
+        "reference_page": [
+          7
+        ]
+      }
+    },
+    {
+      "uid": "train_16",
+      "query": "What are examples of Internet Verbs?",
+      "reference_answer": "Send, Mention, Like, Link, Reply, Rate, Review, Favorite, Friend, Follow, Forward, Edit, Tag, Comment, Check-in",
+      "meta_info": {
+        "file_name": "16.pdf",
+        "reference_page": [
+          12
+        ]
+      }
+    },
+    {
+      "uid": "train_17",
+      "query": "What is the source of the map?",
+      "reference_answer": "Zillow.com",
+      "meta_info": {
+        "file_name": "17.pdf",
+        "reference_page": [
+          18
+        ]
+      }
+    },
+    {
+      "uid": "train_19",
+      "query": "How many people does KMC MAG Group employ?",
+      "reference_answer": "Over 100",
+      "meta_info": {
+        "file_name": "19.pdf",
+        "reference_page": [
+          3
+        ]
+      }
+    },
+    {
+      "uid": "train_20",
+      "query": "What is the CAPEX of listed RE Developers in 2014 in Billions?",
+      "reference_answer": "6.0",
+      "meta_info": {
+        "file_name": "20.pdf",
+        "reference_page": [
+          8
+        ]
+      }
+    },
+    {
+      "uid": "train_21",
+      "query": "Which city has the lowest Grade A Office Cap Rate?",
+      "reference_answer": "Taipei",
+      "meta_info": {
+        "file_name": "21.pdf",
+        "reference_page": [
+          19
+        ]
+      }
+    },
+    {
+      "uid": "train_22",
+      "query": "What percentage is the Grade A Office Cap Rate in Tokyo?",
+      "reference_answer": "3.65",
+      "meta_info": {
+        "file_name": "22.pdf",
+        "reference_page": [
+          19
+        ]
+      }
+    },
+    {
+      "uid": "train_23",
+      "query": "What percentage is the Grade A Office Cap Rate in the city in Japan where there is a Savills office?",
+      "reference_answer": "3.65",
+      "meta_info": {
+        "file_name": "23.pdf",
+        "reference_page": [
+          4,
+          19
+        ]
+      }
+    }
+  ]
+}
