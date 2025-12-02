@@ -1,0 +1,484 @@
+[
+  {
+    "id":"train_2",
+    "file_name":"2.pdf",
+    "reference_page":[
+      7
+    ],
+    "data_source":"slidevqa_train",
+    "prompt":[
+      {
+        "content":"You are a search agent.\n\nYou must always begin with <think>...<\/think> showing your reasoning about the question.\n\nAfter reasoning, output exactly one action tag among <search>...<\/search> or <bbox>[x1, y1, x2, y2]<\/bbox> or <search_complete>true<\/search_complete>.\n\nDo not write anything before <think>. Keep actions on a new line after <\/think>.\n\nWhen using <search>, vary or refine the query using evidence from previous steps, and do not repeat the same query twice.",
+        "role":"system"
+      },
+      {
+        "content":"Question: Which is used more for payment in India in 2013, Credit Cards or Debit Cards?",
+        "role":"user"
+      }
+    ],
+    "reward_model":{
+      "ground_truth":"Credit Cards",
+      "style":"rule"
+    },
+    "extra_info":{
+      "answer":"Credit Cards",
+      "file_name":"2.pdf",
+      "index":0,
+      "question":"Which is used more for payment in India in 2013, Credit Cards or Debit Cards?",
+      "reference_page":[
+        7
+      ],
+      "split":"test"
+    }
+  },
+  {
+    "id":"train_4",
+    "file_name":"4.pdf",
+    "reference_page":[
+      11
+    ],
+    "data_source":"slidevqa_train",
+    "prompt":[
+      {
+        "content":"You are a search agent.\n\nYou must always begin with <think>...<\/think> showing your reasoning about the question.\n\nAfter reasoning, output exactly one action tag among <search>...<\/search> or <bbox>[x1, y1, x2, y2]<\/bbox> or <search_complete>true<\/search_complete>.\n\nDo not write anything before <think>. Keep actions on a new line after <\/think>.\n\nWhen using <search>, vary or refine the query using evidence from previous steps, and do not repeat the same query twice.",
+        "role":"system"
+      },
+      {
+        "content":"Question: How many online shopping orders are made per month in CY2013 in India?",
+        "role":"user"
+      }
+    ],
+    "reward_model":{
+      "ground_truth":"5M",
+      "style":"rule"
+    },
+    "extra_info":{
+      "answer":"5M",
+      "file_name":"4.pdf",
+      "index":1,
+      "question":"How many online shopping orders are made per month in CY2013 in India?",
+      "reference_page":[
+        11
+      ],
+      "split":"test"
+    }
+  },
+  {
+    "id":"train_5",
+    "file_name":"5.pdf",
+    "reference_page":[
+      4
+    ],
+    "data_source":"slidevqa_train",
+    "prompt":[
+      {
+        "content":"You are a search agent.\n\nYou must always begin with <think>...<\/think> showing your reasoning about the question.\n\nAfter reasoning, output exactly one action tag among <search>...<\/search> or <bbox>[x1, y1, x2, y2]<\/bbox> or <search_complete>true<\/search_complete>.\n\nDo not write anything before <think>. Keep actions on a new line after <\/think>.\n\nWhen using <search>, vary or refine the query using evidence from previous steps, and do not repeat the same query twice.",
+        "role":"system"
+      },
+      {
+        "content":"Question: What is the MAIN DISADVANTAGE of INERT GAS?",
+        "role":"user"
+      }
+    ],
+    "reward_model":{
+      "ground_truth":"POSES A GRAVE HEALTH HAZARD",
+      "style":"rule"
+    },
+    "extra_info":{
+      "answer":"POSES A GRAVE HEALTH HAZARD",
+      "file_name":"5.pdf",
+      "index":2,
+      "question":"What is the MAIN DISADVANTAGE of INERT GAS?",
+      "reference_page":[
+        4
+      ],
+      "split":"test"
+    }
+  },
+  {
+    "id":"train_7",
+    "file_name":"7.pdf",
+    "reference_page":[
+      2
+    ],
+    "data_source":"slidevqa_train",
+    "prompt":[
+      {
+        "content":"You are a search agent.\n\nYou must always begin with <think>...<\/think> showing your reasoning about the question.\n\nAfter reasoning, output exactly one action tag among <search>...<\/search> or <bbox>[x1, y1, x2, y2]<\/bbox> or <search_complete>true<\/search_complete>.\n\nDo not write anything before <think>. Keep actions on a new line after <\/think>.\n\nWhen using <search>, vary or refine the query using evidence from previous steps, and do not repeat the same query twice.",
+        "role":"system"
+      },
+      {
+        "content":"Question: What can Provision of an IGS do?",
+        "role":"user"
+      }
+    ],
+    "reward_model":{
+      "ground_truth":"give absolute control",
+      "style":"rule"
+    },
+    "extra_info":{
+      "answer":"give absolute control",
+      "file_name":"7.pdf",
+      "index":3,
+      "question":"What can Provision of an IGS do?",
+      "reference_page":[
+        2
+      ],
+      "split":"test"
+    }
+  },
+  {
+    "id":"train_8",
+    "file_name":"8.pdf",
+    "reference_page":[
+      5
+    ],
+    "data_source":"slidevqa_train",
+    "prompt":[
+      {
+        "content":"You are a search agent.\n\nYou must always begin with <think>...<\/think> showing your reasoning about the question.\n\nAfter reasoning, output exactly one action tag among <search>...<\/search> or <bbox>[x1, y1, x2, y2]<\/bbox> or <search_complete>true<\/search_complete>.\n\nDo not write anything before <think>. Keep actions on a new line after <\/think>.\n\nWhen using <search>, vary or refine the query using evidence from previous steps, and do not repeat the same query twice.",
+        "role":"system"
+      },
+      {
+        "content":"Question: What does an OXYGEN ANALYSER do?",
+        "role":"user"
+      }
+    ],
+    "reward_model":{
+      "ground_truth":"Measures OXYGEN by % volume",
+      "style":"rule"
+    },
+    "extra_info":{
+      "answer":"Measures OXYGEN by % volume",
+      "file_name":"8.pdf",
+      "index":4,
+      "question":"What does an OXYGEN ANALYSER do?",
+      "reference_page":[
+        5
+      ],
+      "split":"test"
+    }
+  },
+  {
+    "id":"train_9",
+    "file_name":"9.pdf",
+    "reference_page":[
+      8
+    ],
+    "data_source":"slidevqa_train",
+    "prompt":[
+      {
+        "content":"You are a search agent.\n\nYou must always begin with <think>...<\/think> showing your reasoning about the question.\n\nAfter reasoning, output exactly one action tag among <search>...<\/search> or <bbox>[x1, y1, x2, y2]<\/bbox> or <search_complete>true<\/search_complete>.\n\nDo not write anything before <think>. Keep actions on a new line after <\/think>.\n\nWhen using <search>, vary or refine the query using evidence from previous steps, and do not repeat the same query twice.",
+        "role":"system"
+      },
+      {
+        "content":"Question: What are the Lower and Upper Limits in Air % by Volume for Propane?",
+        "role":"user"
+      }
+    ],
+    "reward_model":{
+      "ground_truth":"2.2, 9.5",
+      "style":"rule"
+    },
+    "extra_info":{
+      "answer":"2.2, 9.5",
+      "file_name":"9.pdf",
+      "index":5,
+      "question":"What are the Lower and Upper Limits in Air % by Volume for Propane?",
+      "reference_page":[
+        8
+      ],
+      "split":"test"
+    }
+  },
+  {
+    "id":"train_13",
+    "file_name":"13.pdf",
+    "reference_page":[
+      13
+    ],
+    "data_source":"slidevqa_train",
+    "prompt":[
+      {
+        "content":"You are a search agent.\n\nYou must always begin with <think>...<\/think> showing your reasoning about the question.\n\nAfter reasoning, output exactly one action tag among <search>...<\/search> or <bbox>[x1, y1, x2, y2]<\/bbox> or <search_complete>true<\/search_complete>.\n\nDo not write anything before <think>. Keep actions on a new line after <\/think>.\n\nWhen using <search>, vary or refine the query using evidence from previous steps, and do not repeat the same query twice.",
+        "role":"system"
+      },
+      {
+        "content":"Question: How many minutes does Hive take to process 1hr of Site Activity Data?",
+        "role":"user"
+      }
+    ],
+    "reward_model":{
+      "ground_truth":"18",
+      "style":"rule"
+    },
+    "extra_info":{
+      "answer":"18",
+      "file_name":"13.pdf",
+      "index":6,
+      "question":"How many minutes does Hive take to process 1hr of Site Activity Data?",
+      "reference_page":[
+        13
+      ],
+      "split":"test"
+    }
+  },
+  {
+    "id":"train_14",
+    "file_name":"14.pdf",
+    "reference_page":[
+      7
+    ],
+    "data_source":"slidevqa_train",
+    "prompt":[
+      {
+        "content":"You are a search agent.\n\nYou must always begin with <think>...<\/think> showing your reasoning about the question.\n\nAfter reasoning, output exactly one action tag among <search>...<\/search> or <bbox>[x1, y1, x2, y2]<\/bbox> or <search_complete>true<\/search_complete>.\n\nDo not write anything before <think>. Keep actions on a new line after <\/think>.\n\nWhen using <search>, vary or refine the query using evidence from previous steps, and do not repeat the same query twice.",
+        "role":"system"
+      },
+      {
+        "content":"Question: What is the Kodak Brownie Snap-Shot Camera?",
+        "role":"user"
+      }
+    ],
+    "reward_model":{
+      "ground_truth":"first easy to use point and shoot",
+      "style":"rule"
+    },
+    "extra_info":{
+      "answer":"first easy to use point and shoot",
+      "file_name":"14.pdf",
+      "index":7,
+      "question":"What is the Kodak Brownie Snap-Shot Camera?",
+      "reference_page":[
+        7
+      ],
+      "split":"test"
+    }
+  },
+  {
+    "id":"train_16",
+    "file_name":"16.pdf",
+    "reference_page":[
+      12
+    ],
+    "data_source":"slidevqa_train",
+    "prompt":[
+      {
+        "content":"You are a search agent.\n\nYou must always begin with <think>...<\/think> showing your reasoning about the question.\n\nAfter reasoning, output exactly one action tag among <search>...<\/search> or <bbox>[x1, y1, x2, y2]<\/bbox> or <search_complete>true<\/search_complete>.\n\nDo not write anything before <think>. Keep actions on a new line after <\/think>.\n\nWhen using <search>, vary or refine the query using evidence from previous steps, and do not repeat the same query twice.",
+        "role":"system"
+      },
+      {
+        "content":"Question: What are examples of Internet Verbs?",
+        "role":"user"
+      }
+    ],
+    "reward_model":{
+      "ground_truth":"Send, Mention, Like, Link, Reply, Rate, Review, Favorite, Friend, Follow, Forward, Edit, Tag, Comment, Check-in",
+      "style":"rule"
+    },
+    "extra_info":{
+      "answer":"Send, Mention, Like, Link, Reply, Rate, Review, Favorite, Friend, Follow, Forward, Edit, Tag, Comment, Check-in",
+      "file_name":"16.pdf",
+      "index":8,
+      "question":"What are examples of Internet Verbs?",
+      "reference_page":[
+        12
+      ],
+      "split":"test"
+    }
+  },
+  {
+    "id":"train_17",
+    "file_name":"17.pdf",
+    "reference_page":[
+      18
+    ],
+    "data_source":"slidevqa_train",
+    "prompt":[
+      {
+        "content":"You are a search agent.\n\nYou must always begin with <think>...<\/think> showing your reasoning about the question.\n\nAfter reasoning, output exactly one action tag among <search>...<\/search> or <bbox>[x1, y1, x2, y2]<\/bbox> or <search_complete>true<\/search_complete>.\n\nDo not write anything before <think>. Keep actions on a new line after <\/think>.\n\nWhen using <search>, vary or refine the query using evidence from previous steps, and do not repeat the same query twice.",
+        "role":"system"
+      },
+      {
+        "content":"Question: What is the source of the map?",
+        "role":"user"
+      }
+    ],
+    "reward_model":{
+      "ground_truth":"Zillow.com",
+      "style":"rule"
+    },
+    "extra_info":{
+      "answer":"Zillow.com",
+      "file_name":"17.pdf",
+      "index":9,
+      "question":"What is the source of the map?",
+      "reference_page":[
+        18
+      ],
+      "split":"test"
+    }
+  },
+  {
+    "id":"train_19",
+    "file_name":"19.pdf",
+    "reference_page":[
+      3
+    ],
+    "data_source":"slidevqa_train",
+    "prompt":[
+      {
+        "content":"You are a search agent.\n\nYou must always begin with <think>...<\/think> showing your reasoning about the question.\n\nAfter reasoning, output exactly one action tag among <search>...<\/search> or <bbox>[x1, y1, x2, y2]<\/bbox> or <search_complete>true<\/search_complete>.\n\nDo not write anything before <think>. Keep actions on a new line after <\/think>.\n\nWhen using <search>, vary or refine the query using evidence from previous steps, and do not repeat the same query twice.",
+        "role":"system"
+      },
+      {
+        "content":"Question: How many people does KMC MAG Group employ?",
+        "role":"user"
+      }
+    ],
+    "reward_model":{
+      "ground_truth":"Over 100",
+      "style":"rule"
+    },
+    "extra_info":{
+      "answer":"Over 100",
+      "file_name":"19.pdf",
+      "index":10,
+      "question":"How many people does KMC MAG Group employ?",
+      "reference_page":[
+        3
+      ],
+      "split":"test"
+    }
+  },
+  {
+    "id":"train_20",
+    "file_name":"20.pdf",
+    "reference_page":[
+      8
+    ],
+    "data_source":"slidevqa_train",
+    "prompt":[
+      {
+        "content":"You are a search agent.\n\nYou must always begin with <think>...<\/think> showing your reasoning about the question.\n\nAfter reasoning, output exactly one action tag among <search>...<\/search> or <bbox>[x1, y1, x2, y2]<\/bbox> or <search_complete>true<\/search_complete>.\n\nDo not write anything before <think>. Keep actions on a new line after <\/think>.\n\nWhen using <search>, vary or refine the query using evidence from previous steps, and do not repeat the same query twice.",
+        "role":"system"
+      },
+      {
+        "content":"Question: What is the CAPEX of listed RE Developers in 2014 in Billions?",
+        "role":"user"
+      }
+    ],
+    "reward_model":{
+      "ground_truth":"6.0",
+      "style":"rule"
+    },
+    "extra_info":{
+      "answer":"6.0",
+      "file_name":"20.pdf",
+      "index":11,
+      "question":"What is the CAPEX of listed RE Developers in 2014 in Billions?",
+      "reference_page":[
+        8
+      ],
+      "split":"test"
+    }
+  },
+  {
+    "id":"train_21",
+    "file_name":"21.pdf",
+    "reference_page":[
+      19
+    ],
+    "data_source":"slidevqa_train",
+    "prompt":[
+      {
+        "content":"You are a search agent.\n\nYou must always begin with <think>...<\/think> showing your reasoning about the question.\n\nAfter reasoning, output exactly one action tag among <search>...<\/search> or <bbox>[x1, y1, x2, y2]<\/bbox> or <search_complete>true<\/search_complete>.\n\nDo not write anything before <think>. Keep actions on a new line after <\/think>.\n\nWhen using <search>, vary or refine the query using evidence from previous steps, and do not repeat the same query twice.",
+        "role":"system"
+      },
+      {
+        "content":"Question: Which city has the lowest Grade A Office Cap Rate?",
+        "role":"user"
+      }
+    ],
+    "reward_model":{
+      "ground_truth":"Taipei",
+      "style":"rule"
+    },
+    "extra_info":{
+      "answer":"Taipei",
+      "file_name":"21.pdf",
+      "index":12,
+      "question":"Which city has the lowest Grade A Office Cap Rate?",
+      "reference_page":[
+        19
+      ],
+      "split":"test"
+    }
+  },
+  {
+    "id":"train_22",
+    "file_name":"22.pdf",
+    "reference_page":[
+      19
+    ],
+    "data_source":"slidevqa_train",
+    "prompt":[
+      {
+        "content":"You are a search agent.\n\nYou must always begin with <think>...<\/think> showing your reasoning about the question.\n\nAfter reasoning, output exactly one action tag among <search>...<\/search> or <bbox>[x1, y1, x2, y2]<\/bbox> or <search_complete>true<\/search_complete>.\n\nDo not write anything before <think>. Keep actions on a new line after <\/think>.\n\nWhen using <search>, vary or refine the query using evidence from previous steps, and do not repeat the same query twice.",
+        "role":"system"
+      },
+      {
+        "content":"Question: What percentage is the Grade A Office Cap Rate in Tokyo?",
+        "role":"user"
+      }
+    ],
+    "reward_model":{
+      "ground_truth":"3.65",
+      "style":"rule"
+    },
+    "extra_info":{
+      "answer":"3.65",
+      "file_name":"22.pdf",
+      "index":13,
+      "question":"What percentage is the Grade A Office Cap Rate in Tokyo?",
+      "reference_page":[
+        19
+      ],
+      "split":"test"
+    }
+  },
+  {
+    "id":"train_23",
+    "file_name":"23.pdf",
+    "reference_page":[
+      4,
+      19
+    ],
+    "data_source":"slidevqa_train",
+    "prompt":[
+      {
+        "content":"You are a search agent.\n\nYou must always begin with <think>...<\/think> showing your reasoning about the question.\n\nAfter reasoning, output exactly one action tag among <search>...<\/search> or <bbox>[x1, y1, x2, y2]<\/bbox> or <search_complete>true<\/search_complete>.\n\nDo not write anything before <think>. Keep actions on a new line after <\/think>.\n\nWhen using <search>, vary or refine the query using evidence from previous steps, and do not repeat the same query twice.",
+        "role":"system"
+      },
+      {
+        "content":"Question: What percentage is the Grade A Office Cap Rate in the city in Japan where there is a Savills office?",
+        "role":"user"
+      }
+    ],
+    "reward_model":{
+      "ground_truth":"3.65",
+      "style":"rule"
+    },
+    "extra_info":{
+      "answer":"3.65",
+      "file_name":"23.pdf",
+      "index":14,
+      "question":"What percentage is the Grade A Office Cap Rate in the city in Japan where there is a Savills office?",
+      "reference_page":[
+        4,
+        19
+      ],
+      "split":"test"
+    }
+  }
+]
