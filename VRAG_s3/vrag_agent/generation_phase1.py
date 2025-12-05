@@ -236,6 +236,30 @@ class LLMGenerationManager:
 
         return next_obs_ids, next_obs_str, multi_modal_data, multi_modal_inputs
     
+    #수정 pixel value
+    # def _concat_multi_modal_data(self, rollings, next_obs_multi_modal_data:list, next_obs_multi_modal_inputs:list):
+    #     if not 'multi_modal_inputs' in rollings.non_tensor_batch.keys():
+
+    #         rollings.non_tensor_batch['multi_modal_inputs'] = np.empty(len(next_obs_multi_modal_data), dtype=object)
+    #         for idx, item in enumerate(next_obs_multi_modal_inputs):
+    #             rollings.non_tensor_batch['multi_modal_inputs'][idx] = item
+
+    #         rollings.non_tensor_batch['multi_modal_data'] = np.array(next_obs_multi_modal_data, dtype=object)
+
+    #     else:
+
+    #         for idx, multi_modal_data_item in enumerate(next_obs_multi_modal_data):
+    #             if len(multi_modal_data_item['image']) > 0:
+    #                 # data
+    #                 rollings.non_tensor_batch['multi_modal_data'][idx]['image'].extend(multi_modal_data_item['image'])
+    #                 if 'pixel_values' in rollings.non_tensor_batch['multi_modal_inputs'][idx]:
+    #                     rollings.non_tensor_batch['multi_modal_inputs'][idx]['pixel_values'] = torch.cat((rollings.non_tensor_batch['multi_modal_inputs'][idx]['pixel_values'], next_obs_multi_modal_inputs[idx]['pixel_values']),dim=0)
+    #                     rollings.non_tensor_batch['multi_modal_inputs'][idx]['image_grid_thw'] = torch.cat((rollings.non_tensor_batch['multi_modal_inputs'][idx]['image_grid_thw'], next_obs_multi_modal_inputs[idx]['image_grid_thw']),dim=0)
+    #                 else:
+    #                     rollings.non_tensor_batch['multi_modal_inputs'][idx]['pixel_values'] = next_obs_multi_modal_inputs[idx]['pixel_values']
+    #                     rollings.non_tensor_batch['multi_modal_inputs'][idx]['image_grid_thw'] = next_obs_multi_modal_inputs[idx]['image_grid_thw']
+
+    #     return rollings
     def _concat_multi_modal_data(self, rollings, next_obs_multi_modal_data:list, next_obs_multi_modal_inputs:list):
         if not 'multi_modal_inputs' in rollings.non_tensor_batch.keys():
 
@@ -246,19 +270,58 @@ class LLMGenerationManager:
             rollings.non_tensor_batch['multi_modal_data'] = np.array(next_obs_multi_modal_data, dtype=object)
 
         else:
-
             for idx, multi_modal_data_item in enumerate(next_obs_multi_modal_data):
                 if len(multi_modal_data_item['image']) > 0:
-                    # data
                     rollings.non_tensor_batch['multi_modal_data'][idx]['image'].extend(multi_modal_data_item['image'])
-                    if 'pixel_values' in rollings.non_tensor_batch['multi_modal_inputs'][idx]:
-                        rollings.non_tensor_batch['multi_modal_inputs'][idx]['pixel_values'] = torch.cat((rollings.non_tensor_batch['multi_modal_inputs'][idx]['pixel_values'], next_obs_multi_modal_inputs[idx]['pixel_values']),dim=0)
-                        rollings.non_tensor_batch['multi_modal_inputs'][idx]['image_grid_thw'] = torch.cat((rollings.non_tensor_batch['multi_modal_inputs'][idx]['image_grid_thw'], next_obs_multi_modal_inputs[idx]['image_grid_thw']),dim=0)
-                    else:
-                        rollings.non_tensor_batch['multi_modal_inputs'][idx]['pixel_values'] = next_obs_multi_modal_inputs[idx]['pixel_values']
-                        rollings.non_tensor_batch['multi_modal_inputs'][idx]['image_grid_thw'] = next_obs_multi_modal_inputs[idx]['image_grid_thw']
+                    
+                    # ▼▼▼ [디버깅 코드 시작] ▼▼▼
+                    try:
+                        # 1. 에러가 발생할 가능성이 있는 코드 시범 실행
+                        _ = next_obs_multi_modal_inputs[idx]['pixel_values']
+                        
+                        # 문제 없으면 원래 로직 수행
+                        if 'pixel_values' in rollings.non_tensor_batch['multi_modal_inputs'][idx]:
+                            rollings.non_tensor_batch['multi_modal_inputs'][idx]['pixel_values'] = torch.cat((rollings.non_tensor_batch['multi_modal_inputs'][idx]['pixel_values'], next_obs_multi_modal_inputs[idx]['pixel_values']),dim=0)
+                            rollings.non_tensor_batch['multi_modal_inputs'][idx]['image_grid_thw'] = torch.cat((rollings.non_tensor_batch['multi_modal_inputs'][idx]['image_grid_thw'], next_obs_multi_modal_inputs[idx]['image_grid_thw']),dim=0)
+                        else:
+                            rollings.non_tensor_batch['multi_modal_inputs'][idx]['pixel_values'] = next_obs_multi_modal_inputs[idx]['pixel_values']
+                            rollings.non_tensor_batch['multi_modal_inputs'][idx]['image_grid_thw'] = next_obs_multi_modal_inputs[idx]['image_grid_thw']
+
+                    except KeyError as e:
+                        print(f"\n{'='*20} [DEBUG: KeyError Detected] {'='*20}")
+                        print(f"Index: {idx}")
+                        print(f"Error Key: {e}")
+                        
+                        # 원인 분석 1: 원본 이미지는 있는가?
+                        raw_imgs = multi_modal_data_item['image']
+                        print(f"1. Raw Images count: {len(raw_imgs)}")
+                        
+                        # 원인 분석 2: 텍스트 토큰에 이미지 태그가 있는가?
+                        if 'input_ids' in next_obs_multi_modal_inputs[idx]:
+                            input_ids = next_obs_multi_modal_inputs[idx]['input_ids']
+                            decoded_str = self.tokenizer.decode(input_ids[0], skip_special_tokens=False)
+                            
+                            print(f"2. Decoded Text (Length: {len(input_ids[0])}):")
+                            print(f"   Snippet: {decoded_str[:300]} ...") # 앞부분만 출력
+                            
+                            # Qwen2-VL의 비전 태그 확인
+                            has_vision_start = '<|vision_start|>' in decoded_str
+                            has_vision_end = '<|vision_end|>' in decoded_str
+                            
+                            print(f"3. Has Vision Tags? Start: {has_vision_start}, End: {has_vision_end}")
+                            
+                            if len(raw_imgs) > 0 and not has_vision_start:
+                                print("\n[!!! 결론 !!!] 원본 이미지는 존재하지만, 텍스트(Token)에서 이미지 태그가 발견되지 않았습니다.")
+                                print("-> 원인 확정: Context Length Limit으로 인해 이미지 토큰이 잘려나감 (Truncation).")
+                                print("-> Processor가 이미지 토큰을 찾지 못해 'pixel_values'를 생성하지 않았습니다.")
+                        
+                        print(f"{'='*60}\n")
+                        raise e # 디버깅 정보를 출력한 후, 에러를 다시 발생시켜 멈춤
+                    # ▲▲▲ [디버깅 코드 끝] ▲▲▲
 
         return rollings
+    #//
+
         
 
     def _update_rolling_state(self, rollings, cur_responses: torch.Tensor, 
@@ -319,6 +382,27 @@ class LLMGenerationManager:
             if active_batch size is not divisible by num_gpus, pad with first sequence
             then remove padding from output
         """
+        # ▼▼▼ [디버깅 코드 추가] ▼▼▼
+        try:
+            print(f"\n[DEBUG] _generate_with_gpu_padding 진입")
+            print(f"Batch Size: {len(active_batch.batch['input_ids'])}")
+            
+            if 'multi_modal_inputs' in active_batch.non_tensor_batch:
+                mm_inputs = active_batch.non_tensor_batch['multi_modal_inputs']
+                print(f"Multi-modal inputs type: {type(mm_inputs)}")
+                if len(mm_inputs) > 0:
+                    print(f"First item type: {type(mm_inputs[0])}")
+                    # 섞여있는지 확인
+                    types = set([type(item) for item in mm_inputs])
+                    print(f"Unique types in batch: {types}")
+                    
+                    # 빈 딕셔너리나 None이 있는지 확인
+                    empty_count = sum([1 for item in mm_inputs if not item])
+                    print(f"Empty/None items count: {empty_count}")
+
+        except Exception as e:
+            print(f"[DEBUG Error] {e}")
+        # ▲▲▲ [디버깅 코드 끝] ▲▲▲
         num_gpus = self.config.num_gpus
         if num_gpus <= 1:
             return self.actor_rollout_wg.generate_sequences(active_batch)
@@ -481,28 +565,22 @@ class LLMGenerationManager:
                     })
 
                 actor_monitor.start() #측정 지점 1: '계획' 생성 성능 측정 수정]
-                print("DEBUG INPUT:", self.tokenizer.decode(rollings_active.batch['input_ids'][0])) #디버깅 수정
                 gen_output = self._generate_with_gpu_padding(rollings_active)
                 actor_monitor.stop() #측정 끝            
     
                 meta_info = gen_output.meta_info
 
-                #수정 디버깅
-                # responses_ids, responses_str = self._postprocess_responses(gen_output.batch['responses'])
-                # print(responses_str[0])
-                raw_responses = self.tokenizer.batch_decode(gen_output.batch['responses'], skip_special_tokens=False)
-                print("\n" + "="*30 + " RAW MODEL OUTPUT (NO FILTER) " + "="*30)
-                print(raw_responses[0]) # 여기서 모델이 태그 없이 주절거리는지 확인
-                print("="*80 + "\n")
-
-                # 2. 기존 로직 수행
                 responses_ids, responses_str = self._postprocess_responses(gen_output.batch['responses'])
-                print("FILTERED OUTPUT:", responses_str[0])                
-                #//
+                print(responses_str[0])
+              
 
             else:
                 forced_count = active_mask.sum().item()
-                responses_str = [FORCED_COMPLETION_RESPONSE] * forced_count
+                #수정 max turn
+                #responses_str = [FORCED_COMPLETION_RESPONSE] * forced_count
+                eos_token = self.tokenizer.eos_token if self.tokenizer.eos_token else "<|im_end|>"
+                responses_str = [FORCED_COMPLETION_RESPONSE + eos_token] * forced_count
+                #//
                 if forced_count > 0:
                     responses_ids = self._batch_tokenize(responses_str)
                 else:
@@ -608,7 +686,7 @@ class LLMGenerationManager:
         rollings.non_tensor_batch['raw_prompt_ids'] = raw_prompt_ids
         # rollings.non_tensor_batch.pop('raw_prompt_ids')
         
-        if not self.is_validation:
+        if not self.is_validation: 
             rollings, original_right_side = self._add_noisy_multi_modal_data(rollings, original_right_side)
         ### check again
         

@@ -46,7 +46,7 @@ from verl.utils.tracking import ValidationGenerationsLogger
 from torch.utils.data import RandomSampler, SequentialSampler
 from torchdata.stateful_dataloader import StatefulDataLoader
 import re
-from vrag_agent.generation_phase1 import LLMGenerationManager, GenerationConfig
+from vrag_agent.generation import LLMGenerationManager, GenerationConfig
 
 
 #수정 추가 gpu
@@ -523,7 +523,7 @@ class RayPPOTrainer(object):
             # Validation datasets are sent to inference engines as a whole batch,
             # which will schedule the memory themselves.
             # batch_size=len(self.val_dataset),
-            batch_size=505,
+            batch_size=504,
             #num_workers=8,
             num_workers=16, #수정 병목 해결
             shuffle=False,

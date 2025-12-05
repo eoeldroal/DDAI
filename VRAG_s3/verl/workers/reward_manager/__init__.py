@@ -14,5 +14,5 @@
 
 from .naive import NaiveRewardManager
 from .prime import PrimeRewardManager
-from .rm_phase1 import RMManager
-from .rm_eval_phase1 import RMEvalManager
+from .rm_phase2 import RMManager
+from .rm_eval_phase2 import RMEvalManager

@@ -1,12 +1,17 @@
 set -x
-export VLLM_ATTENTION_BACKEND=XFORMERS
+#export VLLM_ATTENTION_BACKEND=XFORMERS
 ENGINE=${1:-vllm}
+mkdir -p ~/sangmin/ray_tmp
+export TMPDIR=~/sangmin/ray_tmp
+export RAY_TMPDIR=~/sangmin/ray_tmp
+export WANDB_API_KEY='8d955a8fe09693b7a2e983616a79aae912307d79'
 
 
-model_path=./outputs/sft-test-filtered/global_step_1776
+model_path=./merged_model_grpo
+#model_path=Qwen/Qwen2.5-VL-7B-Instruct
 #n_gpus=$(nvidia-smi -L | wc -l)
 #for test
-n_gpus=2
+n_gpus=4
 
 #resume rl
 # Resume configuration (override by exporting RESUME_MODE/RESUME_FROM_PATH before running).
@@ -18,13 +23,13 @@ n_gpus=2
 # fi
 #//
 
-train_batch_size=4
+train_batch_size=64
 #ppo_mini_batch_size=$((4 * n_gpus)) #4= gpu에 올릴 데이터 개수
-ppo_mini_batch_size=2 #수정( 4*4)
-ppo_micro_batch_size_per_gpu=1
-log_prob_micro_batch_size_per_gpu=4
+ppo_mini_batch_size=32 #수정( 4*4)
+ppo_micro_batch_size_per_gpu=8
+log_prob_micro_batch_size_per_gpu=8
 #n_agent=5
-n_agent=1 #수정
+n_agent=8 #수정
 
 #oom 해결 위해
 #actor_rollout_ref.rollout.free_cache_engine=False \ -> True로 수정
@@ -66,14 +71,15 @@ log_path="./logs/grpo_output.json"
 # TMP_REPORT_PATH="${SCRIPT_DIR}/logs/nsight/temp_report" 
 # mkdir -p ${NSYS_TEMP_DIR}
 ##
+export RAY_memory_usage_threshold=0.995
 
 python3 -m verl.trainer.main_ppo \
     algorithm.adv_estimator=grpo \
     data.train_files=./data/rag/slidevqa_train_crop.parquet \
     data.val_files=./data/rag/overall_test_crop.parquet \
     data.train_batch_size=$train_batch_size \
-    data.max_prompt_length=1024 \
-    data.max_response_length=512  \
+    data.max_prompt_length=4096 \
+    data.max_response_length=2048  \
     data.image_key=images \
     actor_rollout_ref.model.path=$model_path \
     actor_rollout_ref.actor.optim.lr=1e-6 \
@@ -84,21 +90,20 @@ python3 -m verl.trainer.main_ppo \
     actor_rollout_ref.actor.ppo_mini_batch_size=$ppo_mini_batch_size \
     actor_rollout_ref.actor.ppo_micro_batch_size_per_gpu=$ppo_micro_batch_size_per_gpu \
     actor_rollout_ref.actor.use_kl_loss=True \
-    actor_rollout_ref.actor.kl_loss_coef=0.0 \
+    actor_rollout_ref.actor.kl_loss_coef=0 \
     actor_rollout_ref.actor.kl_loss_type=clipping \
-    actor_rollout_ref.actor.entropy_coeff=0.01 \
+    actor_rollout_ref.actor.entropy_coeff=0 \
     actor_rollout_ref.model.enable_gradient_checkpointing=True \
     actor_rollout_ref.actor.fsdp_config.param_offload=True \
     actor_rollout_ref.actor.fsdp_config.optimizer_offload=True \
-    actor_rollout_ref.rollout.free_cache_engine=False \
+    actor_rollout_ref.rollout.free_cache_engine=True \
     actor_rollout_ref.actor.state_masking=True \
     actor_rollout_ref.rollout.log_prob_micro_batch_size_per_gpu=$log_prob_micro_batch_size_per_gpu \
     actor_rollout_ref.rollout.tensor_model_parallel_size=$tensor_model_parallel_size \
     actor_rollout_ref.rollout.name=$ENGINE \
-    actor_rollout_ref.rollout.gpu_memory_utilization=0.3 \
+    actor_rollout_ref.rollout.gpu_memory_utilization=0.7 \
     actor_rollout_ref.rollout.enable_chunked_prefill=False \
     actor_rollout_ref.rollout.enforce_eager=True \
-    actor_rollout_ref.rollout.max_model_len=4096 \
     actor_rollout_ref.rollout.n=1 \
     actor_rollout_ref.rollout.n_agent=$n_agent \
     actor_rollout_ref.ref.log_prob_micro_batch_size_per_gpu=$log_prob_micro_batch_size_per_gpu \
@@ -115,12 +120,10 @@ python3 -m verl.trainer.main_ppo \
     trainer.experiment_name=my_run \
     trainer.n_gpus_per_node=$n_gpus \
     trainer.nnodes=1 \
-    trainer.save_freq=30 \
-    trainer.test_freq=20 \
-    trainer.total_epochs=2 \
+    trainer.save_freq=10 \
+    trainer.test_freq=1000000 \
+    trainer.total_epochs=1 \
     trainer.resume_mode=disable \
     trainer.val_before_train=$val_before_train \
     retriever.url=$search_url \
     max_turns=$max_turns $@
-
-
