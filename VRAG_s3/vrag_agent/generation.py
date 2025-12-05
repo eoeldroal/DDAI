@@ -32,7 +32,7 @@ from datetime import datetime
 from http import HTTPStatus
 from dotenv import load_dotenv
 
-dotenv_dir = os.path.expanduser('~/workspace/VRAG_test/')
+dotenv_dir = '/home/isdslab/sangmin/VRAG_test/'
 
 # 2. .env 파일의 전체 경로를 만듭니다.
 dotenv_path = os.path.join(dotenv_dir, '.env')
@@ -974,6 +974,7 @@ class LLMGenerationManager:
 
     def _call_frozen_generator_single(self, question: str, image_paths: List[str]) -> Tuple[int, str]:
         if not _HAS_DASHSCOPE:
+            print("🚨 오류: DashScope 설정이 누락되었습니다. (.env 키 확인 또는 라이브러리 설치 필요)") # 디버깅
             return (0, "")
 
         try:
@@ -1007,6 +1008,7 @@ class LLMGenerationManager:
                     max_tokens=int(getattr(self.config, "frozen_max_tokens", 256)),
                 )
             except Exception:
+                print(f"🚨 [API ERROR] Question: {question[:30]}... | Error: {e}")  # 디버깅
                 return (0, "")
 
             code = getattr(resp, "status_code", None)
@@ -1016,6 +1018,7 @@ class LLMGenerationManager:
             
             return (int(code) if isinstance(code, HTTPStatus) else (code or 0), "")
         except Exception:
+            print(f"🚨 오류: API 호출 중 에러 발생: {e}") # 디버깅
             return (0, "")
 
 
